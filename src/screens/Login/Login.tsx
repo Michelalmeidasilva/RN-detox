@@ -56,10 +56,12 @@ const Login: FC = () => {
             control={control}
             render={({ field: { onChange, value } }): JSX.Element => (
               <Input
+                testID='input_email'
                 mt='56px'
                 label='E-mail'
                 placeholder='E-mail'
                 keyboardType='email-address'
+                accessibilityLabel='input_email'
                 value={value}
                 error={errors.email?.message}
                 onChangeText={onChange}
@@ -72,8 +74,10 @@ const Login: FC = () => {
             control={control}
             render={({ field: { onChange, value } }): JSX.Element => (
               <Input
+                testID='input_password'
                 mt='32px'
                 label='Senha'
+                accessibilityLabel='input_password'
                 placeholder='Senha'
                 value={value}
                 secureTextEntry
@@ -82,8 +86,8 @@ const Login: FC = () => {
               />
             )}
           />
-
           <Button
+            testID='button_sign'
             variant='primary'
             accessibilityLabel='text'
             mt={40}

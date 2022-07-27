@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useContext, createContext } from 'react';
 
-import { getToken, clearToken } from 'src/utils';
+import { getToken, setToken, clearToken } from 'src/utils';
 
 interface User {
   name: string;
@@ -44,6 +44,8 @@ const UserProvider: FC = ({ children }) => {
 
   const login: (credentials: CredentialsParams) => Promise<void> = async credentials => {
     try {
+      setUser({ id: 'djdijisdsia', name: credentials.username });
+      setToken('disadjisadiasjdushu');
     } catch (error) {
       console.log(error);
     }

@@ -9,7 +9,7 @@ import { AppProviders, useUser } from 'src/context';
 import { theme } from 'src/theme';
 
 import Authenticated from '../Authenticated';
-import UnauthenticatedApp from 'Unauthenticated';
+import UnauthenticatedApp from '../Unauthenticated';
 
 if (__DEV__) {
   import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));

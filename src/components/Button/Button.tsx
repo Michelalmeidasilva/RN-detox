@@ -24,7 +24,7 @@ interface StyledButton extends TouchableOpacityProps {
   variant?: ButtonVariants;
 }
 
-const Button: FC<ButtonComponent> = ({ text, variant, disabled, loading, ...props }) => {
+const Button: FC<ButtonComponent> = ({ text, variant, disabled, loading, testID, ...props }) => {
   const { colors } = useTheme();
 
   const textColor = useMemo(() => {
@@ -41,6 +41,7 @@ const Button: FC<ButtonComponent> = ({ text, variant, disabled, loading, ...prop
       disabled={disabled}
       my='5px'
       width='100%'
+      testID={testID}
       {...props}
     >
       {loading && <ActivityIndicator size='small' color={textColor} />}

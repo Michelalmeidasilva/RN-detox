@@ -1,6 +1,8 @@
 import React, { FC, useState, useEffect, useContext, createContext } from 'react';
 
 import { getToken, setToken, clearToken } from 'src/utils';
+import { postLogin } from 'src/services';
+import { Alert } from 'react-native';
 
 interface User {
   name: string;
@@ -8,7 +10,7 @@ interface User {
 }
 
 interface CredentialsParams {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -44,9 +46,12 @@ const UserProvider: FC = ({ children }) => {
 
   const login: (credentials: CredentialsParams) => Promise<void> = async credentials => {
     try {
-      setUser({ id: 'djdijisdsia', name: credentials.username });
-      setToken('disadjisadiasjdushu');
+      const { token } = await postLogin(credentials);
+      setUser({ name: credentials.email, id: 'jksd34' });
+
+      setToken(token);
     } catch (error) {
+      Alert.alert('Credenciais Inválidas', 'lorem ipsum');
       console.log(error);
     }
   };

@@ -1,20 +1,23 @@
 const { device, expect, element, by } = require('detox');
 
 describe('Authentication flow', () => {
-  beforeEach(async () => {
-    // await start();
+  beforeAll(async () => {
     await device.launchApp();
   });
 
   afterEach(async () => {
     await device.reloadReactNative();
-    // cleaning up the mess left behind the previous test
+  });
+
+  afterAll(async () => {
+    await device.terminateApp();
   });
 
   it('should have an email and password to tap button', async () => {
     await element(by.id('button_sign')).tap();
 
-    await expect(element(by.text('Campo obrigatório'))).toBeVisible();
+    await expect(element(by.text('Campo obrigatório')).atIndex(0)).toBeVisible();
+    await expect(element(by.text('Campo obrigatório')).atIndex(1)).toBeVisible();
   });
 
   it('should have a valid password', async () => {
@@ -36,24 +39,24 @@ describe('Authentication flow', () => {
   });
 
   it('should go to home screen', async () => {
-    await element(by.id('input_email')).replaceText('michael.lawson@reqres.in');
-    await element(by.id('input_password')).replaceText('Uillia1234');
+    await element(by.id('input_email')).replaceText('michel@gmail.com');
+    await element(by.id('input_password')).replaceText('test12345@');
 
     await element(by.id('button_sign')).tap();
 
     await expect(element(by.text('Built with react-native-nave-typescript'))).toBeVisible();
   });
 
-  it('should have a valid credentials', async () => {
-    await element(by.id('input_email')).replaceText('michael@reqres.in');
-    await element(by.id('input_password')).replaceText('dsdsdsdsa');
+  // Multiple taps
+  // Rodar testes no CI.
+  // Gray box end-to-end testing and automation framework for mobile apps
+
+  it('shouldn`t go to home screen', async () => {
+    await element(by.id('input_email')).replaceText('ovier@ddmail.com');
+    await element(by.id('input_password')).replaceText('dsdsadasdada');
 
     await element(by.id('button_sign')).tap();
 
     await expect(element(by.text('Credenciais Inválidas'))).toBeVisible();
   });
 });
-
-/**
- *
- */

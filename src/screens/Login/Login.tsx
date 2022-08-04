@@ -92,6 +92,7 @@ const Login: FC = () => {
             accessibilityLabel='text'
             mt={40}
             text='Entrar'
+            loading={isLoading}
             onPress={handleSubmit(handleLogin)}
           />
         </ScrollView>

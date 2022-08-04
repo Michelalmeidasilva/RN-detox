@@ -1,7 +1,11 @@
-const { device, expect, element, by } = require('detox');
+const { device, expect, element, by, init } = require('detox');
+
+const mockServer = require('./__mocks__/server-mock');
 
 describe('Authentication flow', () => {
   beforeAll(async () => {
+    await mockServer.start();
+
     await device.launchApp();
   });
 
@@ -10,6 +14,7 @@ describe('Authentication flow', () => {
   });
 
   afterAll(async () => {
+    await mockServer.stop();
     await device.terminateApp();
   });
 
@@ -38,7 +43,18 @@ describe('Authentication flow', () => {
     await expect(element(by.text('Informe um e-mail válido'))).toBeVisible();
   });
 
-  it('should go to home screen', async () => {
+  it('should have credentials invalid error and stay at login screen', async () => {
+    await element(by.id('input_email')).replaceText('ovier@ddmail.com');
+    await element(by.id('input_password')).replaceText('dsdsadasdada');
+
+    await element(by.id('button_sign')).tap();
+
+    await element(by.text('OK')).tap();
+
+    await expect(element(by.text('Credenciais Inválidas'))).not.toBeVisible();
+  });
+
+  it.only('should go to home screen', async () => {
     await element(by.id('input_email')).replaceText('michel@gmail.com');
     await element(by.id('input_password')).replaceText('test12345@');
 
@@ -50,13 +66,4 @@ describe('Authentication flow', () => {
   // Multiple taps
   // Rodar testes no CI.
   // Gray box end-to-end testing and automation framework for mobile apps
-
-  it('shouldn`t go to home screen', async () => {
-    await element(by.id('input_email')).replaceText('ovier@ddmail.com');
-    await element(by.id('input_password')).replaceText('dsdsadasdada');
-
-    await element(by.id('button_sign')).tap();
-
-    await expect(element(by.text('Credenciais Inválidas'))).toBeVisible();
-  });
 });

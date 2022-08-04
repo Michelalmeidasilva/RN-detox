@@ -11,7 +11,6 @@ export const retrieveData = async <T>(key: string): Promise<T | undefined> => {
   }
 };
 
-export const removeData = async (key: string) =>
-  EncryptedStorage.removeItem(key);
+export const removeData = async (key: string) => EncryptedStorage.removeItem(key);
 
 export const clearStorage = async () => EncryptedStorage.clear();

@@ -1,20 +1,31 @@
 const { device, expect, element, by } = require('detox');
 
+const mockServer = require('./__mocks__/server-mock');
+
+const wait = duration => new Promise(resolve => setTimeout(() => resolve(), duration));
+
 describe('Authentication flow', () => {
-  beforeEach(async () => {
-    // await start();
+  beforeAll(async () => {
+    await mockServer.start();
+
     await device.launchApp();
   });
 
   afterEach(async () => {
+    await wait(2000);
+
     await device.reloadReactNative();
-    // cleaning up the mess left behind the previous test
+  });
+
+  afterAll(async () => {
+    await mockServer.stop();
   });
 
   it('should have an email and password to tap button', async () => {
     await element(by.id('button_sign')).tap();
 
-    await expect(element(by.text('Campo obrigatório'))).toBeVisible();
+    await expect(element(by.text('Campo obrigatório')).atIndex(0)).toBeVisible();
+    await expect(element(by.text('Campo obrigatório')).atIndex(1)).toBeVisible();
   });
 
   it('should have a valid password', async () => {
@@ -35,25 +46,23 @@ describe('Authentication flow', () => {
     await expect(element(by.text('Informe um e-mail válido'))).toBeVisible();
   });
 
-  it('should go to home screen', async () => {
-    await element(by.id('input_email')).replaceText('michael.lawson@reqres.in');
-    await element(by.id('input_password')).replaceText('Uillia1234');
+  it('should have credentials invalid error and stay at login screen', async () => {
+    await element(by.id('input_email')).replaceText('ovier@ddmail.com');
+    await element(by.id('input_password')).replaceText('dsdsadasdada');
 
     await element(by.id('button_sign')).tap();
 
-    await expect(element(by.text('Built with react-native-nave-typescript'))).toBeVisible();
+    await element(by.text('OK')).tap();
+
+    await expect(element(by.text('Credenciais Inválidas'))).not.toBeVisible();
   });
 
-  it('should have a valid credentials', async () => {
-    await element(by.id('input_email')).replaceText('michael@reqres.in');
-    await element(by.id('input_password')).replaceText('dsdsdsdsa');
+  it('should go to home screen', async () => {
+    await element(by.id('input_email')).replaceText('michel@gmail.com');
+    await element(by.id('input_password')).replaceText('test12345@');
 
     await element(by.id('button_sign')).tap();
 
-    await expect(element(by.text('Credenciais Inválidas'))).toBeVisible();
+    await expect(element(by.text('Home'))).toBeVisible();
   });
 });
-
-/**
- *
- */

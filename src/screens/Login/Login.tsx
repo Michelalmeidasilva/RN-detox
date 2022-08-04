@@ -50,7 +50,6 @@ const Login: FC = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <Text>{user?.name ?? 'Não logado'}</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Controller
             name='email'

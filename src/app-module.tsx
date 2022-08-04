@@ -26,8 +26,6 @@ const App: FC = () => {
     }
   };
 
-  console.log('user', user);
-
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={MyTheme}>

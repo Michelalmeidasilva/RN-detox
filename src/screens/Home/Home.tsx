@@ -68,6 +68,7 @@ const Home: FC = () => {
         />
         <Text>Checked</Text>
       </Row>
+
       <FlatList
         data={data}
         testID='flatlist'

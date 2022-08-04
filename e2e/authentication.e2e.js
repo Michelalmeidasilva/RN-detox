@@ -1,6 +1,8 @@
-const { device, expect, element, by, init } = require('detox');
+const { device, expect, element, by } = require('detox');
 
 const mockServer = require('./__mocks__/server-mock');
+
+const wait = duration => new Promise(resolve => setTimeout(() => resolve(), duration));
 
 describe('Authentication flow', () => {
   beforeAll(async () => {
@@ -10,6 +12,8 @@ describe('Authentication flow', () => {
   });
 
   afterEach(async () => {
+    await wait(2000);
+
     await device.reloadReactNative();
   });
 

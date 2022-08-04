@@ -2,13 +2,7 @@
 
 > React Native Detox - Fluxo básico de autenticação com o Detox
 
-## :arrow_forward: Usage
-
-```sh
-npx react-native init MyApp --template react-native-template-nave-typescript
-```
-
-## :wrench: Rodando
+## :wrench: Como rodar? 
 
 Para rodar esse dispositivo você deve seguir os seguintes passos: ps
 

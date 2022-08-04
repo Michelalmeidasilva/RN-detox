@@ -56,7 +56,7 @@ yarn ios
 
 Running tests
 
-## Requisitos:
+Requisitos:
 
 - Instalação do [detox-cli](https://wix.github.io/Detox/docs/introduction/getting-started/#install-detox-command-line-tools-detox-cli)
 

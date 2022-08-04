@@ -14,8 +14,8 @@
     "pod-install": "cd ios && pod install && cd ..",
     "commit": "npx git-cz",
     "start:test": "npx react-native start --sourceExts mock.js,js,json,ts,tsx",
-    "detox-ios-release": "detox test --configuration 'ios.release' ",
-    "detox-android-release": "detox test --configuration 'android.release' "
+    "detox-ios-debug": "detox test --configuration 'ios.release' ",
+    "detox-android-debug": "detox test --configuration 'android.debug' "
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",

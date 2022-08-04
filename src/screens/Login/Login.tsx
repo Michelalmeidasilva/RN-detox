@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Input, Column, Button } from 'src/components';
+import { Input, Column, Button, Text } from 'src/components';
 import { LoginSchema } from 'src/utils';
 import { useUser } from 'src/context';
 
@@ -17,7 +17,7 @@ interface FormLoginData {
 
 const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useUser();
+  const { login, user } = useUser();
 
   const {
     control,
@@ -50,6 +50,7 @@ const Login: FC = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
+        <Text>{user?.name ?? 'Não logado'}</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Controller
             name='email'

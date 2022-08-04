@@ -15,7 +15,6 @@ describe('Authentication flow', () => {
 
   afterAll(async () => {
     await mockServer.stop();
-    await device.terminateApp();
   });
 
   it('should have an email and password to tap button', async () => {
@@ -54,16 +53,12 @@ describe('Authentication flow', () => {
     await expect(element(by.text('Credenciais Inválidas'))).not.toBeVisible();
   });
 
-  it.only('should go to home screen', async () => {
+  it('should go to home screen', async () => {
     await element(by.id('input_email')).replaceText('michel@gmail.com');
     await element(by.id('input_password')).replaceText('test12345@');
 
     await element(by.id('button_sign')).tap();
 
-    await expect(element(by.text('Built with react-native-nave-typescript'))).toBeVisible();
+    await expect(element(by.text('Home'))).toBeVisible();
   });
-
-  // Multiple taps
-  // Rodar testes no CI.
-  // Gray box end-to-end testing and automation framework for mobile apps
 });

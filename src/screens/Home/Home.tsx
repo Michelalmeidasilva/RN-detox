@@ -56,7 +56,8 @@ const Home: FC = () => {
 
   return (
     <Fragment>
-      <Text>Built with react-native-nave-typescript</Text>
+      <Text>Home</Text>
+
       <Row>
         <Switch
           testID='switch_button'

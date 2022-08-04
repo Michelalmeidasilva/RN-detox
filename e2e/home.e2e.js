@@ -1,12 +1,16 @@
-const { device, expect, element, by, waitFor, init } = require('detox');
+const { device, expect, element, by, waitFor } = require('detox');
 
-describe.skip('Home screen', () => {
+const mockServer = require('./__mocks__/server-mock');
+
+describe('Home screen', () => {
   beforeAll(async () => {
+    mockServer.start();
     await device.launchApp();
+    await grantAccessToUserWithValidCredentials();
   });
 
-  beforeEach(async () => {
-    await device.reloadReactNative();
+  afterAll(async () => {
+    mockServer.stop();
   });
 
   it('should scroll down list', async () => {
@@ -23,3 +27,10 @@ describe.skip('Home screen', () => {
     await expect(element(by.text('Item 1'))).not.toBeVisible();
   });
 });
+
+const grantAccessToUserWithValidCredentials = async () => {
+  await element(by.id('input_email')).replaceText('michel@gmail.com');
+  await element(by.id('input_password')).replaceText('test12345@');
+
+  await element(by.id('button_sign')).tap();
+};
